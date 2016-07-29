@@ -1,15 +1,15 @@
 # Pixelbrain: elérhető global változók és metódusok
 
-## goTo ( pixelId )
+## goTo ( [string] pixelId )
 A goTo metódus segítségével betölthetsz egy meglévő definiált pixelt. Amint meghívódik ez, átkerül a vezérlés, és az adott script szekció további hívásai érvényét veszítik.
 
-## echo ( text, (optional) attachment )
+## echo ( [string] text, [object, optional] attachment )
 
-## input ( settings )
+## input ( [object] settings )
 
 ## data
 
-### data.pixel (pixelId)
+### data.pixel ( [string] pixelId )
 Egy adott pixel értékét lehet le kérni. Ha nincs beállítva, vagy nincs ilyen pixel akkor `undefined` választ kapunk.
 
 ```js
@@ -25,8 +25,8 @@ if(!name) {
 ### data.component
 
 ## api
-### api.mailTo ( userId, text )
-### api.http ( method, url, data, header )
+### api.mailTo ( [string] userId, [string] text )
+### api.http ( [string] method, [string] url, [object, optional] data, [object, optional] header )
 
 ## delay 
 
