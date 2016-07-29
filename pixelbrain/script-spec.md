@@ -88,9 +88,9 @@ if(!name) {
 
 ```
 
-### data.session
+### data.sessionStorage
+### data.botStorage
 ### data.user
-### data.storage
 ### data.component
 ### data.history
 ### data.dictionary
@@ -111,6 +111,7 @@ if(!name) {
 ### api.createEvent ( [string] `name`, [mixed, optional] `value` )
 Lehetőség van saját eventek küldésére oda ahol az adott robot beágyazásra kerül, így a beágyazó oldal tud reagálni különböző eseményekre.
 
+### importUtility ( [string] `name`, [string, optional] `alias` )
+### utility
 
 ## delay 
-
