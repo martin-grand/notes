@@ -1,4 +1,4 @@
-# Pixelbrain: elérhető global változók és metódusok
+# Pixelbrain: elérhető változók és metódusok
 
 ## goTo ( [string] `pixelId` )
 A `goTo` metódus segítségével betölthetsz egy meglévő definiált pixelt. A `pixelId` paraméterrel adjuk meg hogy hova akarunk navigálni. Amint meghívódik ez, átkerül a vezérlés, és az adott script szekció további hívásai érvényét veszítik.
@@ -56,6 +56,19 @@ if (hour < 12) {
     // embed:
     echo('Good evening!', 'https://youtu.be/hUF33WAjMas');
 }
+
+```
+
+Van lehetőség a szövegbuborékhoz tartozó avatar kép testreszabhatóságára. Alapból a robothoz tarozik egy avatar ami  megjelenik minden szövegbuborékhoz tartozóan, ám ha az `echo` metódus `avatar` paraméterébe egy kép linkjét adjuk meg, ez felülíródik, de csak az aktuális szövegbuborég kiírásának alkalmával.
+
+Az alábbi példakódban háthatjuk hogyan tudunk megjeleníteni csatolmánnyal, vagy csatolmány nélkül testreszabható avatart:
+
+```js
+// with attachment:
+echo('Good morning!', 'https://wikipedia.org/wiki/Good_Morning_America', 'https://website.com/good-afternoon.jpg');
+
+// without attachment:
+echo('Good morning!', false, 'https://website.com/good-afternoon.jpg');
 
 ```
 
