@@ -19,7 +19,7 @@ if (hour < 12) {
 
 ```
 
-## echo ( [string] `text`, [string, optional] `attachment` )
+## echo ( [string] `text`, [string, optional] `attachment`, [string, optional] `avatar`)
 Az `echo` metódus segítségével kiírathatunk egy buborékot a falhasználónak. A `text` paraméter adja meg hogy milyen szöveget tartalmazzon a buborék, tehát hogy mit modnjon a robotunk a felhasználónak.
 
 Az alábbi példakódban például adott napszaknak megfelelően köszöntjük a felhasználót:
