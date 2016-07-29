@@ -72,7 +72,7 @@ echo('Good morning!', false, 'https://website.com/good-afternoon.jpg');
 
 ```
 
-## input ( [object] `settings` )
+## input ( [string] `type`, [array, optional] `format`, [number, optional] `minimum`, [number, optional] `maximum` )
 
 ## data
 
@@ -92,11 +92,14 @@ if(!name) {
 ### data.user
 ### data.storage
 ### data.component
+### data.history
+### data.dictionary
 
 ## api
 ### api.mailTo ( [string] `userId`, [string] `text` )
 ### api.http ( [string] `method`, [string] `url`, [object, optional] `data`, [object, optional] `header` )
+### api.log ( [string] `text`, [string, optional] `label` )
+
 
 ## delay 
 
-## dictionary
