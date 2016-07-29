@@ -72,7 +72,7 @@ echo('Good morning!', false, 'https://website.com/good-afternoon.jpg');
 
 ```
 
-## input ( [string] `type`, [array, optional] `format`, [number, optional] `minimum`, [number, optional] `maximum` )
+## input ( [string] `type`, [mixed, optional] `format`, [number, optional] `minimum`, [number, optional] `maximum` )
 
 ## data
 
@@ -95,10 +95,21 @@ if(!name) {
 ### data.history
 ### data.dictionary
 
+### hasAccess ( [string] `method` )
+### getAccess ( [array] `methods` )
+
 ## api
-### api.mailTo ( [string] `userId`, [string] `text` )
+### api.mailTo ( [string] `userId`, [string] `text`, [date, optional] `date` )
 ### api.http ( [string] `method`, [string] `url`, [object, optional] `data`, [object, optional] `header` )
 ### api.log ( [string] `text`, [string, optional] `label` )
+### api.loadComponent ( [string] `componentId`, [string, optional] `scope`, [object, optional] `parameters` )
+### api.updateUserData ( [string] `userId`, [string] `dataName`, [mixed] `dataValue` )
+
+### api.createPayment ( [string] `from`, [string] `to`, [number] `credit` ) // available later!
+
+### api.createBot ( [object] `source` )
+### api.createEvent ( [string] `name`, [mixed, optional] `value` )
+Lehetőség van saját eventek küldésére oda ahol az adott robot beágyazásra kerül, így a beágyazó oldal tud reagálni különböző eseményekre.
 
 
 ## delay 
