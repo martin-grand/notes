@@ -1,22 +1,63 @@
 # Pixelbrain: elérhető global változók és metódusok
 
 ## goTo ( [string] `pixelId` )
-A goTo metódus segítségével betölthetsz egy meglévő definiált pixelt. Amint meghívódik ez, átkerül a vezérlés, és az adott script szekció további hívásai érvényét veszítik.
+A `goTo` metódus segítségével betölthetsz egy meglévő definiált pixelt. A `pixelId` paraméterrel adjuk meg hogy hova akarunk navigálni. Amint meghívódik ez, átkerül a vezérlés, és az adott script szekció további hívásai érvényét veszítik.
+
+Az alábbi példakódban például adott napszaktól függően más más pixel-re navigáljuk tovább a felhasználót:
+
 ```js
 var today = new Date(),
     hour = today.getHours();
 
 if (hour < 12) {
-  goTo('morning');
+    goTo('morning');
 } else if (hour < 18) {
-  goTo('afternoon');
+    goTo('afternoon');
 } else {
-  goTo('evening');
+    goTo('evening');
 }
 
 ```
 
-## echo ( [string] `text`, [object, optional] `attachment` )
+## echo ( [string] `text`, [string, optional] `attachment` )
+Az `echo` metódus segítségével kiírathatunk egy buborékot a falhasználónak. A `text` paraméter adja meg hogy milyen szöveget tartalmazzon a buborék, tehát hogy mit modnjon a robotunk a felhasználónak.
+
+Az alábbi példakódban például adott napszaknak megfelelően köszöntjük a felhasználót:
+
+```js
+var today = new Date(),
+    hour = today.getHours();
+
+if (hour < 12) {
+    echo('Good morning!');
+} else if (hour < 18) {
+    echo('Good afternoon!');
+} else {
+    echo('Good evening!');
+}
+
+```
+
+Van lehetőségünk a szövegbuborékoz az `attachment` paraméterrel mellékletet (linket, képet, videót vagy beáhyazható, lejátszahtó tartalmat) csatolni. Az `attachment` paraméter egy link lehet, és attól függően hogy mire mutat attól függően mutatja a buborék a mellékletet.
+
+Az alábbi példakódban például adott napszaknak megfelelően köszöntjük a felhasználót, és egy hozzátartozó mellékletet is csatolunk a szövegbuborékhoz:
+
+```js
+var today = new Date(),
+    hour = today.getHours();
+
+if (hour < 12) {
+    // link:
+    echo('Good morning!', 'https://wikipedia.org/wiki/Good_Morning_America');
+} else if (hour < 18) {
+    // image:
+    echo('Good afternoon!', 'https://website.com/good-afternoon.jpg');
+} else {
+    // embed:
+    echo('Good evening!', 'https://youtu.be/hUF33WAjMas');
+}
+
+```
 
 ## input ( [object] `settings` )
 
