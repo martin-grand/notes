@@ -99,11 +99,11 @@ if(!name) {
 ## getAccess ( [array] `methods` )
 
 ## api
-### api.mailTo ( [string] `userId`, [string] `text`, [date, optional] `date` )
+### api.mailToUser ( [string] `userId`, [string] `text`, [date, optional] `date`, [string, optional] `from` )
 ### api.http ( [string] `method`, [string] `url`, [object, optional] `data`, [object, optional] `header` )
 ### api.log ( [string] `text`, [string, optional] `label` )
 ### api.loadComponent ( [string] `componentId`, [string, optional] `scope`, [object, optional] `parameters` )
-### api.updateUserData ( [string] `userId`, [string] `dataName`, [mixed] `dataValue` )
+### api.updateUserData ( [string] `dataName`, [mixed] `dataValue` )
 
 ### api.createPayment ( [string] `from`, [string] `to`, [number] `credit` ) // available later!
 
