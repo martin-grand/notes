@@ -95,8 +95,8 @@ if(!name) {
 ### data.history
 ### data.dictionary
 
-### hasAccess ( [string] `method` )
-### getAccess ( [array] `methods` )
+## hasAccess ( [string] `method` )
+## getAccess ( [array] `methods` )
 
 ## api
 ### api.mailTo ( [string] `userId`, [string] `text`, [date, optional] `date` )
@@ -111,7 +111,7 @@ if(!name) {
 ### api.createEvent ( [string] `name`, [mixed, optional] `value` )
 Lehetőség van saját eventek küldésére oda ahol az adott robot beágyazásra kerül, így a beágyazó oldal tud reagálni különböző eseményekre.
 
-### importUtility ( [string] `name`, [string, optional] `alias` )
-### utility
+## importUtility ( [string] `name`, [string, optional] `alias` )
+## utility
 
 ## delay 
