@@ -70,7 +70,7 @@ Egy adott pixel értékét lehet le kérni. Ha nincs beállítva, vagy nincs ily
 var name = data.pixel('get_name');
 
 if(!name) {
-  goTo('get_name');
+    goTo('get_name');
 }
 
 ```
