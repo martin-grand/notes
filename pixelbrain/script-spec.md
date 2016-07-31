@@ -77,16 +77,60 @@ Az input metódussal lehetőség van adato(ka)t bekérni a felhasználótól. Be
 
 Az alábbi típusok elérhetőek:
 - **text** (sima szöveges bemenet. Az `options` paraméterben 3 paraméter adható meg: `format`, `minimum`, `maximum`) Az alábbi példák mutatják ennek a felhasználását:
-    - `input ( 'text' )` egy tetszőleges szöveget kérünk be, ami minimum **1** és maximum **120** karakterből áll. Ez a minimum és maximum az alapértelmezett értéket.
-    - `input ( 'text', { minimum : 5, maximum : 160 } )` egy olyan szöveget kérünk be ebben az esetben, ami minimum **5** és maxumum **160** karakterből áll.
-    - `input ( 'text', { format : 'email' } )` egy emilcímet kérünk be a felhasználótól.
-    - `input ( 'text', { format : 'link' } )` egy linket kérünk be a felhasználótól.
+    - `input('text')` egy tetszőleges szöveget kérünk be, ami minimum **1** és maximum **120** karakterből áll. Ez a minimum és maximum az alapértelmezett értékek.
+    - `input('text', { minimum : 5, maximum : 160 })` egy olyan szöveget kérünk be ebben az esetben, ami minimum **5** és maxumum **160** karakterből áll.
+    - `input('text', { format : 'email' })` egy emilcímet kérünk be a felhasználótól.
+    - `input('text', { format : 'link' })` egy linket kérünk be a felhasználótól.
 - **number** (egy számot kérhetünk be. Az `options` paraméterben 2 paraméter adható meg: `minimum`, `maximum`) Az alábbi példák mutatják ennek a felhasználását:
-    - `input ( 'number' )` egy tetszőleges számot kérünk be.
-    - `input ( 'number', { minimum : -100, maximum : 100 } )` egy számot kérünk be **-100** és **100** között.
-- **date**
-- **select**
-- **multiple-select**
+    - `input('number')` egy tetszőleges számot kérünk be.
+    - `input('number', { minimum : -100, maximum : 100 })` egy számot kérünk be **-100** és **100** között.
+- **date** (egy dátumot, vagy időpontot kérhetünk be a felhasználótól. Az `options` paraméterben 5 paraméter adható meg: `year`, `month`, `day`, `hour` és `minit`. Ezek a paraméterek azt határozzák meg hogy mit szeretnénk bekérni az adott felhasználótól. Alapértelmezettként mindet bekérjük, szóval amit nem szerenénk `false` értékre kell állítanunk.) Az alábbi példák, különböző eshetőségeteket mutatnak be:
+    - `input('date')` így egy pontos időpontot kérhetünk be, mondjuk egy emlékeztető időpontját.
+    - `input('date', { year : false, month : false, day : false })` így egy időpontot kérhetünk be például napi szintű emlékeztetőhöz.
+- **select** (álltalunk meghatározott értékek közül kínálhatunk fel választási lehetőséget a felhasználónak) Az `options` paraméterben egy values tömböt vár az input, ahol megadhatjuk hogy mi kerüljün kiírásra és milyen értéken, az alábbi módon:
+```js
+echo('Which are not fruit?');
+input('select', { values : [
+    { label : 'apple', value : 0 },
+    { label : 'pear', value : 0 },
+    { label : 'carrot', value : 1 }
+]}).then(function(answer){
+    if(answer.value === 0) {
+        goTo('wrong-answer');
+    } else {
+        goTo('good-answer');
+    }
+});
+
+
+```
+- **multiple-select** (álltalunk meghatározott értékek közül kínálhatunk fel több választási lehetőséget a felhasználónak) az érték feltöltés ugyan úgy zajlik, mint a **select** típusnál, az `options` kiegészül egy `minimum` és egy `maxumum` paraméterrel, amik azt határozzák meg hogy minimum és maximum mennyi értéket választhat ki a felhasnáló (alapból a minimum értéke **0** a maximumé pedig korlátlan, tehát az összes opció kiválasztható):
+```js
+echo('Which are fruit?');
+input('multiple-select', { minimum : 1, maximum : 2, values : [
+    { label : 'apple', value : 0 },
+    { label : 'pear', value : 0 },
+    { label : 'carrot', value : 1 }
+]}).then(function(answer) {
+    var correctAnswer = 0,
+        i;
+        
+    for(i = 0; i < answer.length; i++) {
+        if(answer[i].value === 0) {
+            correctAnswer++;
+        }
+    }
+    
+    if(correctAnswer === 2) {
+        goTo('good-answer');
+    } else {
+        goTo('wrong-answer');
+    }
+    
+});
+
+
+```
 - **array**
 
 ## data
