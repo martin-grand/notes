@@ -73,6 +73,15 @@ echo('Good morning!', false, 'https://website.com/good-afternoon.jpg');
 ```
 
 ## input ( [string] `type`, [mixed, optional] `format`, [number, optional] `minimum`, [number, optional] `maximum` )
+Az input metódussal lehetőség van adato(ka)t bekérni a felhasználótól. Bekérhető sima szöveges tartalom, szám, dátum választás, és még sok féle tartalom. A `type` paraméterrel határozzuk meg a bekérendő adat típusát. 
+
+Az alábbi típusok elérhetőek:
+- text
+- number
+- date
+- select
+- multiple-select
+- array
 
 ## data
 
