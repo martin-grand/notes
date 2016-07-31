@@ -76,15 +76,18 @@ echo('Good morning!', false, 'https://website.com/good-afternoon.jpg');
 Az input metódussal lehetőség van adato(ka)t bekérni a felhasználótól. Bekérhető sima szöveges tartalom, szám, dátum választás, és még sok féle tartalom. A `type` paraméterrel határozzuk meg a bekérendő adat típusát. 
 
 Az alábbi típusok elérhetőek:
-- text (sima szöveges bemenet. Az `options` paraméterben 3 paraméter adható meg: `format`, `minimum`, `maximum` ) Az alábbi példák mutatják ennek afelhasználását:
-    -  `input ( 'text', { minimum : 1, maximum : 160 } )` egy olyan szöveget kérünk be ebben az esetben, ami minimum 1 és maxumum 160 karakterből áll
-    -  `input ( 'text', { format : 'email' } )` egy amilcímet kérünk be a felhasználótól.
-    -  `input ( 'text', { format : 'link' } )` egy linket kérünk be a felhasználótól.
-- number
-- date
-- select
-- multiple-select
-- array
+- **text** (sima szöveges bemenet. Az `options` paraméterben 3 paraméter adható meg: `format`, `minimum`, `maximum`) Az alábbi példák mutatják ennek a felhasználását:
+    - `input ( 'text' )` egy tetszőleges szöveget kérünk be, ami minimum **1** és maximum **120** karakterből áll. Ez a minimum és maximum az alapértelmezett értéket.
+    - `input ( 'text', { minimum : 5, maximum : 160 } )` egy olyan szöveget kérünk be ebben az esetben, ami minimum **5** és maxumum **160** karakterből áll.
+    - `input ( 'text', { format : 'email' } )` egy emilcímet kérünk be a felhasználótól.
+    - `input ( 'text', { format : 'link' } )` egy linket kérünk be a felhasználótól.
+- **number** (egy számot kérhetünk be. Az `options` paraméterben 2 paraméter adható meg: `minimum`, `maximum`) Az alábbi példák mutatják ennek a felhasználását:
+    - `input ( 'number' )` egy tetszőleges számot kérünk be.
+    - `input ( 'number', { minimum : -100, maximum : 100 } )` egy számot kérünk be **-100** és **100** között.
+- **date**
+- **select**
+- **multiple-select**
+- **array**
 
 ## data
 
