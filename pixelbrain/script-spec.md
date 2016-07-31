@@ -16,7 +16,6 @@ if (hour < 12) {
 } else {
     goTo('evening');
 }
-
 ```
 
 ## echo ( [string] `text`, [string, optional] `attachment`, [string, optional] `avatar`)
@@ -35,7 +34,6 @@ if (hour < 12) {
 } else {
     echo('Good evening!');
 }
-
 ```
 
 Van lehetőségünk a szövegbuborékoz az `attachment` paraméterrel mellékletet (linket, képet, videót vagy beáhyazható, lejátszahtó tartalmat) csatolni. Az `attachment` paraméter egy link lehet, és attól függően hogy mire mutat attól függően mutatja a buborék a mellékletet.
@@ -56,7 +54,6 @@ if (hour < 12) {
     // embed:
     echo('Good evening!', 'https://youtu.be/hUF33WAjMas');
 }
-
 ```
 
 Van lehetőség a szövegbuborékhoz tartozó avatar kép testreszabhatóságára. Alapból a robothoz tarozik egy avatar ami  megjelenik minden szövegbuborékhoz tartozóan, ám ha az `echo` metódus `avatar` paraméterébe egy kép linkjét adjuk meg, ez felülíródik, de csak az aktuális szövegbuborég kiírásának alkalmával.
@@ -69,11 +66,19 @@ echo('Good morning!', 'https://wikipedia.org/wiki/Good_Morning_America', 'https:
 
 // without attachment:
 echo('Good morning!', false, 'https://website.com/good-afternoon.jpg');
-
 ```
 
 ## input ( [string] `type`, [object, optional] `options` )
 Az input metódussal lehetőség van adato(ka)t bekérni a felhasználótól. Bekérhető sima szöveges tartalom, szám, dátum választás, és még sok féle tartalom. A `type` paraméterrel határozzuk meg a bekérendő adat típusát. 
+
+Az input metódus minden esetben egy `Promise`-t fog vissza adni a bekért érték(ek)kel. A `Promise`-ra egy használati példa eben az esetben, például megkérdezzük a felhasználó nevét, majd köszöntjük őt a saját nevén:
+```js
+echo('What is your name?');
+
+input('text').then(function(answer){
+    echo('Hello ' + answer + '!');
+});
+```
 
 Az alábbi típusok elérhetőek:
 - **text** (sima szöveges bemenet. Az `options` paraméterben 3 paraméter adható meg: `format`, `minimum`, `maximum`) Az alábbi példák mutatják ennek a felhasználását:
@@ -90,6 +95,7 @@ Az alábbi típusok elérhetőek:
 - **select** (álltalunk meghatározott értékek közül kínálhatunk fel választási lehetőséget a felhasználónak) Az `options` paraméterben egy values tömböt vár az input, ahol megadhatjuk hogy mi kerüljün kiírásra és milyen értéken, az alábbi módon:
 ```js
 echo('Which are not fruit?');
+
 input('select', { values : [
     { label : 'apple', value : 0 },
     { label : 'pear', value : 0 },
@@ -101,12 +107,11 @@ input('select', { values : [
         goTo('good-answer');
     }
 });
-
-
 ```
-- **multiple-select** (álltalunk meghatározott értékek közül kínálhatunk fel több választási lehetőséget a felhasználónak) az érték feltöltés ugyan úgy zajlik, mint a **select** típusnál, az `options` kiegészül egy `minimum` és egy `maxumum` paraméterrel, amik azt határozzák meg hogy minimum és maximum mennyi értéket választhat ki a felhasnáló (alapból a minimum értéke **0** a maximumé pedig korlátlan, tehát az összes opció kiválasztható):
+- **multiple-select** (álltalunk meghatározott értékek közül kínálhatunk fel több választási lehetőséget a felhasználónak) az érték feltöltés ugyan úgy zajlik, mint a **select** típusnál, az `options` kiegészül egy `minimum` és egy `maxumum` paraméterrel, amik azt határozzák meg hogy minimum és maximum mennyi értéket választhat ki a felhasnáló. Alapból a minimum értéke **0** a maximumé pedig korlátlan, tehát az összes opció kiválasztható:
 ```js
-echo('Which are fruit?');
+echo('Which are fruit(s)?');
+
 input('multiple-select', { minimum : 1, maximum : 2, values : [
     { label : 'apple', value : 0 },
     { label : 'pear', value : 0 },
@@ -114,26 +119,24 @@ input('multiple-select', { minimum : 1, maximum : 2, values : [
 ]}).then(function(answer) {
     var correctAnswer = 0,
         i;
-        
+    
     for(i = 0; i < answer.length; i++) {
         if(answer[i].value === 0) {
             correctAnswer++;
         }
     }
-    
     if(correctAnswer === 2) {
         goTo('good-answer');
     } else {
         goTo('wrong-answer');
     }
-    
 });
-
-
 ```
-- **array**
+- **array** A felhasználónak lehetősége van tömböt / listát megadnia, Az `options` paraméterben azt határozhatjuk meg, hogy minimum hány elemű tömböt várunk el, és maxumum hány elemet adhat meg. Mindez a `minimum` és `maximum` paraméterek segítségével. Alapértelmezetten minimum **1**, maximum pedig **10** elem adható meg. Például:
+    - `input('array', { minimum : 2, maximum : 20 })` egy olyan tömböt ad vissza, amit a felhasználó meg ad és legfeljebb 20, legalább 2 elemből fog állni.
 
 ## data
+A `data` különböző adatrétegek elérésére kínál számunkra lehetőséget. Lássuk sorban mire is.
 
 ### data.pixel ( [string] `pixelId` )
 Egy adott pixel értékét lehet le kérni. Ha nincs beállítva, vagy nincs ilyen pixel akkor `undefined` választ kapunk.
@@ -148,6 +151,22 @@ if(!name) {
 ```
 
 ### data.sessionStorage
+Egy adot beszélgetéshez tartozó adatstruktúrát tárolhatunk a `data.sessionStorage`-ban. Két metódusa van. A `set` és a `get`. Lássuk a használati példákat:
+#### data.sessionStorage.get ( [string] `dataName` )
+Ezzel a `data.sessionStorage`-ba írhatunk. Egy `Promise`-t fog vissza adni, ami a `dataName`-hez tartozó értéket adja vissza. Amennyiben nem tartozik hozzá érték `undefined` választ kapunk. Lássunk egy gyakorlati példát, ahol megvizsgáljuk hogy a `data.sessionStorage` tartalmaz e **name** néven értéket, és ha igen köszöntsük a felahasználót a már korábban tárolt nevén:
+
+```js
+data.sessionStorage.get('name').then(function(name){
+    if(name) {
+        echo 'Hello ' + name + '!';
+    } else {
+        echo 'Hello My Friend!';
+    }
+});
+```
+
+#### data.sessionStorage.set ( [string] `dataName`, [mixed] `dataValue` )
+
 ### data.botStorage
 ### data.user
 #### data.user.get ( [string] `dataName` )
