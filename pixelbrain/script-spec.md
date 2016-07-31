@@ -91,6 +91,8 @@ if(!name) {
 ### data.sessionStorage
 ### data.botStorage
 ### data.user
+#### data.user.get ( [string] `dataName` )
+#### data.user.set ( [string] `dataName`, [mixed] `dataValue` )
 ### data.component
 ### data.history
 ### data.dictionary
@@ -103,7 +105,6 @@ if(!name) {
 ### api.http ( [string] `method`, [string] `url`, [object, optional] `data`, [object, optional] `header` )
 ### api.log ( [string] `text`, [string, optional] `label` )
 ### api.loadComponent ( [string] `componentId`, [string, optional] `scope`, [object, optional] `parameters` )
-### api.updateUserData ( [string] `dataName`, [mixed] `dataValue` )
 
 ### api.createPayment ( [string] `from`, [string] `to`, [number] `credit` ) // available later!
 
