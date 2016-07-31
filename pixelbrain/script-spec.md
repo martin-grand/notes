@@ -152,8 +152,8 @@ if(!name) {
 
 ### data.sessionStorage
 Egy adot beszélgetéshez tartozó adatstruktúrát tárolhatunk a `data.sessionStorage`-ban. Két metódusa van. A `set` és a `get`. Lássuk a használati példákat:
-#### data.sessionStorage.get ( [string] `dataName` )
-Ezzel a `data.sessionStorage`-ba írhatunk. Egy `Promise`-t fog vissza adni, ami a `dataName`-hez tartozó értéket adja vissza. Amennyiben nem tartozik hozzá érték `undefined` választ kapunk. Lássunk egy gyakorlati példát, ahol megvizsgáljuk hogy a `data.sessionStorage` tartalmaz e **name** néven értéket, és ha igen köszöntsük a felahasználót a már korábban tárolt nevén:
+#### data.sessionStorage.get ( [string] `name` )
+Ezzel a `data.sessionStorage`-ból olvashatunk. Egy `Promise`-t fog vissza adni, ami a `name`-hez tartozó értéket adja vissza. Amennyiben nem tartozik hozzá érték `undefined` választ kapunk. Lássunk egy gyakorlati példát, ahol megvizsgáljuk hogy a `data.sessionStorage` tartalmaz e **name** néven értéket, és ha igen köszöntsük a felahasználót a már korábban tárolt nevén:
 
 ```js
 data.sessionStorage.get('name').then(function(name){
@@ -165,12 +165,28 @@ data.sessionStorage.get('name').then(function(name){
 });
 ```
 
-#### data.sessionStorage.set ( [string] `dataName`, [mixed] `dataValue` )
+#### data.sessionStorage.set ( [string] `name`, [mixed] `value` )
+Ezzel a `data.sessionStorage`-ba írhatunk. A `name` határozza meg hogy milyen kulcs néven írunk, a `value` pedig hogy milyen értéket. Lássunk egy gyakorlati példát, ahol megvizsgáljuk hogy a `data.sessionStorage` tartalmaz e **name** néven értéket, és ha nem kérjük be azt és írjuk be a `data.sessionStorage`-ba:
+
+```js
+data.sessionStorage.get('name').then(function(name){
+    if(name) {
+        echo 'Hello ' + name + '!';
+    } else {
+        echo 'What is your name?';
+        input('text').then(function(name){
+            data.sessionStorage.set('name', name);
+            echo 'Hello ' + name + '!';
+        });
+    }
+});
+```
+
 
 ### data.botStorage
 ### data.user
-#### data.user.get ( [string] `dataName` )
-#### data.user.set ( [string] `dataName`, [mixed] `dataValue` )
+#### data.user.get ( [string] `name` )
+#### data.user.set ( [string] `name`, [mixed] `value` )
 ### data.component
 ### data.history
 ### data.dictionary
