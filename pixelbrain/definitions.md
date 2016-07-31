@@ -1,6 +1,7 @@
 # definíciók
 
 ## robot
+## beszélgetés
 ## pixel
 ## szövegbuborék
 ## avatar
