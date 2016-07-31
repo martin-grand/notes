@@ -72,11 +72,14 @@ echo('Good morning!', false, 'https://website.com/good-afternoon.jpg');
 
 ```
 
-## input ( [string] `type`, [mixed, optional] `format`, [number, optional] `minimum`, [number, optional] `maximum` )
+## input ( [string] `type`, [object, optional] `options` )
 Az input metódussal lehetőség van adato(ka)t bekérni a felhasználótól. Bekérhető sima szöveges tartalom, szám, dátum választás, és még sok féle tartalom. A `type` paraméterrel határozzuk meg a bekérendő adat típusát. 
 
 Az alábbi típusok elérhetőek:
-- text
+- text (sima szöveges bemenet. Az `options` paraméterben 3 paraméter adható meg: `format`, `minimum`, `maximum` ) Az alábbi példák mutatják ennek afelhasználását:
+    -  `input ( 'text', { minimum : 1, maximum : 160 } )` egy olyan szöveget kérünk be ebben az esetben, ami minimum 1 és maxumum 160 karakterből áll
+    -  `input ( 'text', { format : 'email' } )` egy amilcímet kérünk be a felhasználótól.
+    -  `input ( 'text', { format : 'link' } )` egy linket kérünk be a felhasználótól.
 - number
 - date
 - select
