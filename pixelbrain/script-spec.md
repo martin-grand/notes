@@ -201,10 +201,17 @@ data.sessionStorage.get('name').then(function(name){
 ### api.loadComponent ( [string] `componentId`, [string, optional] `scope`, [object, optional] `parameters` )
 
 ### api.createPayment ( [string] `from`, [string] `to`, [number] `credit` ) // available later!
+### api.applyPayment ( [string] `id` ) // available later!
+### api.cancelPayment ( [string] `id` ) // available later!
 
 ### api.createBot ( [object] `source` )
+### api.createArticle ( [object] `source` ) // available later!
+
 ### api.createEvent ( [string] `name`, [mixed, optional] `value` )
 Lehetőség van saját eventek küldésére oda ahol az adott robot beágyazásra kerül, így a beágyazó oldal tud reagálni különböző eseményekre.
+
+### api.open ( [string] `url`, [string, optional] `method`, [object, optional] `data` )
+Ennek a metódusnak a meghívásával elnavigálhatjuk a felhasználót egy webcímre.
 
 ## importUtility ( [string] `name`, [string, optional] `alias` )
 ## utility
