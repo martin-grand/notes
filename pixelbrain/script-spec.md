@@ -89,9 +89,9 @@ Az alábbi típusok elérhetőek:
 - **number** (egy számot kérhetünk be. Az `options` paraméterben 2 paraméter adható meg: `minimum`, `maximum`) Az alábbi példák mutatják ennek a felhasználását:
     - `input('number')` egy tetszőleges számot kérünk be.
     - `input('number', { minimum : -100, maximum : 100 })` egy számot kérünk be **-100** és **100** között.
-- **date** (egy dátumot, vagy időpontot kérhetünk be a felhasználótól. Az `options` paraméterben 5 paraméter adható meg: `year`, `month`, `day`, `hour` és `minit`. Ezek a paraméterek azt határozzák meg hogy mit szeretnénk bekérni az adott felhasználótól. Alapértelmezettként mindet bekérjük, szóval amit nem szerenénk `false` értékre kell állítanunk.) Az alábbi példák, különböző eshetőségeteket mutatnak be:
-    - `input('date')` így egy pontos időpontot kérhetünk be, mondjuk egy emlékeztető időpontját.
-    - `input('date', { year : false, month : false, day : false })` így egy időpontot kérhetünk be például napi szintű emlékeztetőhöz.
+- **time** (egy dátumot, időpontot kérhetünk be a felhasználótól. Az `options` paraméterben 6 paraméter adható meg: `year`, `month`, `day`, `hour`, `weekday` és `minit`. Ezek a paraméterek azt határozzák meg hogy mit szeretnénk bekérni az adott felhasználótól. Alapértelmezettként mindet bekérjük, szóval amit nem szerenénk `false` értékre kell állítanunk.) Az alábbi példák, különböző eshetőségeteket mutatnak be:
+    - `input('time')` így egy pontos időpontot kérhetünk be, mondjuk egy emlékeztető időpontját.
+    - `input('time', { year : false, month : false, day : false })` így egy időpontot kérhetünk be például napi szintű emlékeztetőhöz.
 - **select** (álltalunk meghatározott értékek közül kínálhatunk fel választási lehetőséget a felhasználónak) Az `options` paraméterben egy values tömböt vár az input, ahol megadhatjuk hogy mi kerüljün kiírásra és milyen értéken, az alábbi módon:
 ```js
 echo('Which are not fruit?');
