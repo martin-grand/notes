@@ -201,9 +201,9 @@ Lehetőség van jogosultságok vizsgálatára. A `method` paraméter egy adott m
 ```js
 hasAccess('user.name').then(function(hasAccess){
     if(hasAccess) {
-        tell('I have acces to read your name! :)');
+        say('I have acces to read your name! :)');
     } else {
-        tell('I have no acces to read your name! :(');
+        say('I have no acces to read your name! :(');
     }
 });
 ```
