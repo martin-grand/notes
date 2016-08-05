@@ -18,8 +18,8 @@ if (hour < 12) {
 }
 ```
 
-## speak ( [string] `content`, [string, optional] `attachment`, [string, optional] `avatar`)
-Az `speak` metódus segítségével kiírathatunk egy buborékot a falhasználónak. A `content` paraméter adja meg hogy milyen szöveget tartalmazzon a buborék, tehát hogy mit modnjon a robotunk a felhasználónak.
+## say ( [string] `content`, [string, optional] `attachment`, [string, optional] `avatar`)
+A `say` metódus segítségével kiírathatunk egy buborékot a falhasználónak. A `content` paraméter adja meg hogy milyen szöveget tartalmazzon a buborék, tehát hogy mit modnjon a robotunk a felhasználónak.
 
 Az alábbi példakódban például adott napszaknak megfelelően köszöntjük a felhasználót:
 
@@ -28,11 +28,11 @@ var today = new Date(),
     hour = today.getHours();
 
 if (hour < 12) {
-    speak('Good morning!');
+    say('Good morning!');
 } else if (hour < 18) {
-    speak('Good afternoon!');
+    say('Good afternoon!');
 } else {
-    speak('Good evening!');
+    say('Good evening!');
 }
 ```
 
@@ -46,26 +46,26 @@ var today = new Date(),
 
 if (hour < 12) {
     // link:
-    speak('Good morning!', 'https://wikipedia.org/wiki/Good_Morning_America');
+    say('Good morning!', 'https://wikipedia.org/wiki/Good_Morning_America');
 } else if (hour < 18) {
     // image:
-    speak('Good afternoon!', 'https://website.com/good-afternoon.jpg');
+    say('Good afternoon!', 'https://website.com/good-afternoon.jpg');
 } else {
     // embed:
-    speak('Good evening!', 'https://youtu.be/hUF33WAjMas');
+    say('Good evening!', 'https://youtu.be/hUF33WAjMas');
 }
 ```
 
-Van lehetőség a szövegbuborékhoz tartozó avatar kép testreszabhatóságára. Alapból a robothoz tarozik egy avatar ami  megjelenik minden szövegbuborékhoz tartozóan, ám ha az `speak` metódus `avatar` paraméterébe egy kép linkjét adjuk meg, ez felülíródik, de csak az aktuális szövegbuborég kiírásának alkalmával.
+Van lehetőség a szövegbuborékhoz tartozó avatar kép testreszabhatóságára. Alapból a robothoz tarozik egy avatar ami  megjelenik minden szövegbuborékhoz tartozóan, ám ha az `say` metódus `avatar` paraméterébe egy kép linkjét adjuk meg, ez felülíródik, de csak az aktuális szövegbuborég kiírásának alkalmával.
 
 Az alábbi példakódban háthatjuk hogyan tudunk megjeleníteni csatolmánnyal, vagy csatolmány nélkül testreszabható avatart:
 
 ```js
 // with attachment:
-speak('Good morning!', 'https://wikipedia.org/wiki/Good_Morning_America', 'https://website.com/good-afternoon.jpg');
+say('Good morning!', 'https://wikipedia.org/wiki/Good_Morning_America', 'https://website.com/good-afternoon.jpg');
 
 // without attachment:
-speak('Good morning!', false, 'https://website.com/good-afternoon.jpg');
+say('Good morning!', false, 'https://website.com/good-afternoon.jpg');
 ```
 
 ## ask ( [string] `type`, [object, optional] `options` )
@@ -73,10 +73,10 @@ Az ask metódussal lehetőség van adato(ka)t bekérni a felhasználótól. Bek�
 
 Az ask metódus minden esetben egy `Promise`-t fog vissza adni a bekért érték(ek)kel. A `Promise`-ra egy használati példa eben az esetben, például megkérdezzük a felhasználó nevét, majd köszöntjük őt a saját nevén:
 ```js
-speak('What is your name?');
+say('What is your name?');
 
 ask('text').then(function(answer){
-    speak('Hello ' + answer + '!');
+    say('Hello ' + answer + '!');
 });
 ```
 
@@ -100,7 +100,7 @@ Az alábbi típusok elérhetőek:
     - `ask('dateTime', { minimumDate : new Date(1900,0,14), maximumDate : new Date(), minimumTime : '9:00', maximumTime : '17:30' })` így egy időpontot kérhetünk be 1900 Január 14. és a mai dátum között 9:00 és 17:00 közti időpontban.  A visszatérő érték egy dátum objektum lesz.
 - **select** (álltalunk meghatározott értékek közül kínálhatunk fel választási lehetőséget a felhasználónak) Az `options` paraméterben egy values tömböt vár az ask, ahol megadhatjuk hogy mi kerüljün kiírásra és milyen értéken, az alábbi módon:
 ```js
-speak('Which are not fruit?');
+say('Which are not fruit?');
 
 ask('select', { values : [
     { label : 'apple', value : 0 },
@@ -116,7 +116,7 @@ ask('select', { values : [
 ```
 - **multiple-select** (álltalunk meghatározott értékek közül kínálhatunk fel több választási lehetőséget a felhasználónak) az érték feltöltés ugyan úgy zajlik, mint a **select** típusnál, az `options` kiegészül egy `minimum` és egy `maxumum` paraméterrel, amik azt határozzák meg hogy minimum és maximum mennyi értéket választhat ki a felhasnáló. Alapból a minimum értéke **0** a maximumé pedig korlátlan, tehát az összes opció kiválasztható:
 ```js
-speak('Which are fruit(s)?');
+say('Which are fruit(s)?');
 
 ask('multiple-select', { minimum : 1, maximum : 2, values : [
     { label : 'apple', value : 0 },
@@ -163,9 +163,9 @@ Ezzel a `data.sessionStorage`-ból olvashatunk. A `name`-hez tartozó értéket 
 
 ```js
 if(data.sessionStorage.get('name')) {
-    speak('Hello ' + name + '!');
+    say('Hello ' + name + '!');
 } else {
-    speak('Hello My Friend!');
+    say('Hello My Friend!');
 }
 ```
 
@@ -175,12 +175,12 @@ Ezzel a `data.sessionStorage`-ba írhatunk. A `name` határozza meg hogy milyen 
 ```js
 data.sessionStorage.get('name').then(function(name){
     if(name) {
-        speak 'Hello ' + name + '!';
+        say('Hello ' + name + '!');
     } else {
-        speak 'What is your name?';
+        say('What is your name?');
         ask('text').then(function(name){
             data.sessionStorage.set('name', name);
-            speak 'Hello ' + name + '!';
+            say('Hello ' + name + '!');
         });
     }
 });
