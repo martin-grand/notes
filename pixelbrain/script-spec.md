@@ -18,8 +18,8 @@ if (hour < 12) {
 }
 ```
 
-## echo ( [string] `content`, [string, optional] `attachment`, [string, optional] `avatar`)
-Az `echo` metódus segítségével kiírathatunk egy buborékot a falhasználónak. A `content` paraméter adja meg hogy milyen szöveget tartalmazzon a buborék, tehát hogy mit modnjon a robotunk a felhasználónak.
+## speak ( [string] `content`, [string, optional] `attachment`, [string, optional] `avatar`)
+Az `speak` metódus segítségével kiírathatunk egy buborékot a falhasználónak. A `content` paraméter adja meg hogy milyen szöveget tartalmazzon a buborék, tehát hogy mit modnjon a robotunk a felhasználónak.
 
 Az alábbi példakódban például adott napszaknak megfelelően köszöntjük a felhasználót:
 
@@ -28,11 +28,11 @@ var today = new Date(),
     hour = today.getHours();
 
 if (hour < 12) {
-    echo('Good morning!');
+    speak('Good morning!');
 } else if (hour < 18) {
-    echo('Good afternoon!');
+    speak('Good afternoon!');
 } else {
-    echo('Good evening!');
+    speak('Good evening!');
 }
 ```
 
@@ -46,63 +46,63 @@ var today = new Date(),
 
 if (hour < 12) {
     // link:
-    echo('Good morning!', 'https://wikipedia.org/wiki/Good_Morning_America');
+    speak('Good morning!', 'https://wikipedia.org/wiki/Good_Morning_America');
 } else if (hour < 18) {
     // image:
-    echo('Good afternoon!', 'https://website.com/good-afternoon.jpg');
+    speak('Good afternoon!', 'https://website.com/good-afternoon.jpg');
 } else {
     // embed:
-    echo('Good evening!', 'https://youtu.be/hUF33WAjMas');
+    speak('Good evening!', 'https://youtu.be/hUF33WAjMas');
 }
 ```
 
-Van lehetőség a szövegbuborékhoz tartozó avatar kép testreszabhatóságára. Alapból a robothoz tarozik egy avatar ami  megjelenik minden szövegbuborékhoz tartozóan, ám ha az `echo` metódus `avatar` paraméterébe egy kép linkjét adjuk meg, ez felülíródik, de csak az aktuális szövegbuborég kiírásának alkalmával.
+Van lehetőség a szövegbuborékhoz tartozó avatar kép testreszabhatóságára. Alapból a robothoz tarozik egy avatar ami  megjelenik minden szövegbuborékhoz tartozóan, ám ha az `speak` metódus `avatar` paraméterébe egy kép linkjét adjuk meg, ez felülíródik, de csak az aktuális szövegbuborég kiírásának alkalmával.
 
 Az alábbi példakódban háthatjuk hogyan tudunk megjeleníteni csatolmánnyal, vagy csatolmány nélkül testreszabható avatart:
 
 ```js
 // with attachment:
-echo('Good morning!', 'https://wikipedia.org/wiki/Good_Morning_America', 'https://website.com/good-afternoon.jpg');
+speak('Good morning!', 'https://wikipedia.org/wiki/Good_Morning_America', 'https://website.com/good-afternoon.jpg');
 
 // without attachment:
-echo('Good morning!', false, 'https://website.com/good-afternoon.jpg');
+speak('Good morning!', false, 'https://website.com/good-afternoon.jpg');
 ```
 
-## input ( [string] `type`, [object, optional] `options` )
-Az input metódussal lehetőség van adato(ka)t bekérni a felhasználótól. Bekérhető sima szöveges tartalom, szám, dátum választás, és még sok féle tartalom. A `type` paraméterrel határozzuk meg a bekérendő adat típusát. 
+## ask ( [string] `type`, [object, optional] `options` )
+Az ask metódussal lehetőség van adato(ka)t bekérni a felhasználótól. Bekérhető sima szöveges tartalom, szám, dátum választás, és még sok féle tartalom. A `type` paraméterrel határozzuk meg a bekérendő adat típusát. 
 
-Az input metódus minden esetben egy `Promise`-t fog vissza adni a bekért érték(ek)kel. A `Promise`-ra egy használati példa eben az esetben, például megkérdezzük a felhasználó nevét, majd köszöntjük őt a saját nevén:
+Az ask metódus minden esetben egy `Promise`-t fog vissza adni a bekért érték(ek)kel. A `Promise`-ra egy használati példa eben az esetben, például megkérdezzük a felhasználó nevét, majd köszöntjük őt a saját nevén:
 ```js
-echo('What is your name?');
+speak('What is your name?');
 
-input('text').then(function(answer){
-    echo('Hello ' + answer + '!');
+ask('text').then(function(answer){
+    speak('Hello ' + answer + '!');
 });
 ```
 
 Az alábbi típusok elérhetőek:
 - **text** (sima szöveges bemenet. Az `options` paraméterben 3 paraméter adható meg: `format`, `minimum`, `maximum`) Az alábbi példák mutatják ennek a felhasználását:
-    - `input('text')` egy tetszőleges szöveget kérünk be, ami minimum **1** és maximum **120** karakterből áll. Ez a minimum és maximum az alapértelmezett értékek.
-    - `input('text', { minimum : 5, maximum : 160 })` egy olyan szöveget kérünk be ebben az esetben, ami minimum **5** és maxumum **160** karakterből áll.
-    - `input('text', { format : 'email' })` egy emilcímet kérünk be a felhasználótól.
-    - `input('text', { format : 'link' })` egy linket kérünk be a felhasználótól.
+    - `ask('text')` egy tetszőleges szöveget kérünk be, ami minimum **1** és maximum **120** karakterből áll. Ez a minimum és maximum az alapértelmezett értékek.
+    - `ask('text', { minimum : 5, maximum : 160 })` egy olyan szöveget kérünk be ebben az esetben, ami minimum **5** és maxumum **160** karakterből áll.
+    - `ask('text', { format : 'email' })` egy emilcímet kérünk be a felhasználótól.
+    - `ask('text', { format : 'link' })` egy linket kérünk be a felhasználótól.
 - **number** (egy számot kérhetünk be. Az `options` paraméterben 2 paraméter adható meg: `minimum`, `maximum`) Az alábbi példák mutatják ennek a felhasználását:
-    - `input('number')` egy tetszőleges számot kérünk be.
-    - `input('number', { minimum : -100, maximum : 100 })` egy számot kérünk be **-100** és **100** között.
+    - `ask('number')` egy tetszőleges számot kérünk be.
+    - `ask('number', { minimum : -100, maximum : 100 })` egy számot kérünk be **-100** és **100** között.
 - **time** *not imlemented* (egy időpontot kérhetünk be a felhasználótól. Az `options` paraméterben 2 paraméter adható meg: `minimum`, `maximum`. Itt meghatározhatjuk hogy mi legyen a legkorább és legkésőbbi időpont ami megadható) Az alábbi példák, különböző eshetőségeteket mutatnak be:
-    - `input('time')` így egy pontos időpontot kérhetünk be, mondjuk egy emlékeztető időpontját.
-    - `input('time', { minimum : '9:00', maximum : '17:30' })` így egy időpontot kérhetünk be 9:00 és 17:00 között, például mikorra kér időpontot. A visszatérő érték egy szöveg lesz, pl.: '14:45'
+    - `ask('time')` így egy pontos időpontot kérhetünk be, mondjuk egy emlékeztető időpontját.
+    - `ask('time', { minimum : '9:00', maximum : '17:30' })` így egy időpontot kérhetünk be 9:00 és 17:00 között, például mikorra kér időpontot. A visszatérő érték egy szöveg lesz, pl.: '14:45'
 - **date** *not imlemented* (egy dátumot kérhetünk be a felhasználótól. Az `options` paraméterben 2 paraméter adható meg: `minimum`, `maximum`. Itt meghatározhatjuk hogy mi legyen a legkorább és legkésőbbi dátum ami megadható) Az alábbi példák, különböző eshetőségeteket mutatnak be:
-    - `input('date')` így egy tetszőleges dátumot kérhetünk be.
-    - `input('date', { minimum : new Date(1900,0,14), maximum : new Date() })` így egy időpontot kérhetünk be 1900 Január 14. és a mai dátum között.  A visszatérő érték egy dátum objektum lesz.
+    - `ask('date')` így egy tetszőleges dátumot kérhetünk be.
+    - `ask('date', { minimum : new Date(1900,0,14), maximum : new Date() })` így egy időpontot kérhetünk be 1900 Január 14. és a mai dátum között.  A visszatérő érték egy dátum objektum lesz.
 - **dateTime** *not imlemented* (egy dátumidőt kérhetünk be a felhasználótól. Az `options` paraméterben 4 paraméter adható meg: `minimumDate`, `maximumDate`, `minimumTime`, `maximumTime`,. Itt meghatározhatjuk hogy mi legyen a legkorább és legkésőbbi dátum ami megadható, illetve a legkorábbi és legkésőbbi időpont) Az alábbi példák, különböző eshetőségeteket mutatnak be:
-    - `input('dateTime')` így egy tetszőleges dátumidőt kérhetünk be.
-    - `input('dateTime', { minimumDate : new Date(1900,0,14), maximumDate : new Date(), minimumTime : '9:00', maximumTime : '17:30' })` így egy időpontot kérhetünk be 1900 Január 14. és a mai dátum között 9:00 és 17:00 közti időpontban.  A visszatérő érték egy dátum objektum lesz.
-- **select** (álltalunk meghatározott értékek közül kínálhatunk fel választási lehetőséget a felhasználónak) Az `options` paraméterben egy values tömböt vár az input, ahol megadhatjuk hogy mi kerüljün kiírásra és milyen értéken, az alábbi módon:
+    - `ask('dateTime')` így egy tetszőleges dátumidőt kérhetünk be.
+    - `ask('dateTime', { minimumDate : new Date(1900,0,14), maximumDate : new Date(), minimumTime : '9:00', maximumTime : '17:30' })` így egy időpontot kérhetünk be 1900 Január 14. és a mai dátum között 9:00 és 17:00 közti időpontban.  A visszatérő érték egy dátum objektum lesz.
+- **select** (álltalunk meghatározott értékek közül kínálhatunk fel választási lehetőséget a felhasználónak) Az `options` paraméterben egy values tömböt vár az ask, ahol megadhatjuk hogy mi kerüljün kiírásra és milyen értéken, az alábbi módon:
 ```js
-echo('Which are not fruit?');
+speak('Which are not fruit?');
 
-input('select', { values : [
+ask('select', { values : [
     { label : 'apple', value : 0 },
     { label : 'pear', value : 0 },
     { label : 'carrot', value : 1 }
@@ -116,9 +116,9 @@ input('select', { values : [
 ```
 - **multiple-select** (álltalunk meghatározott értékek közül kínálhatunk fel több választási lehetőséget a felhasználónak) az érték feltöltés ugyan úgy zajlik, mint a **select** típusnál, az `options` kiegészül egy `minimum` és egy `maxumum` paraméterrel, amik azt határozzák meg hogy minimum és maximum mennyi értéket választhat ki a felhasnáló. Alapból a minimum értéke **0** a maximumé pedig korlátlan, tehát az összes opció kiválasztható:
 ```js
-echo('Which are fruit(s)?');
+speak('Which are fruit(s)?');
 
-input('multiple-select', { minimum : 1, maximum : 2, values : [
+ask('multiple-select', { minimum : 1, maximum : 2, values : [
     { label : 'apple', value : 0 },
     { label : 'pear', value : 0 },
     { label : 'carrot', value : 1 }
@@ -139,7 +139,7 @@ input('multiple-select', { minimum : 1, maximum : 2, values : [
 });
 ```
 - **array** A felhasználónak lehetősége van tömböt / listát megadnia, Az `options` paraméterben azt határozhatjuk meg, hogy minimum hány elemű tömböt várunk el, és maxumum hány elemet adhat meg. Mindez a `minimum` és `maximum` paraméterek segítségével. Alapértelmezetten minimum **1**, maximum pedig **10** elem adható meg. Például:
-    - `input('array', { minimum : 2, maximum : 20 })` egy olyan tömböt ad vissza, amit a felhasználó meg ad és legfeljebb 20, legalább 2 elemből fog állni.
+    - `ask('array', { minimum : 2, maximum : 20 })` egy olyan tömböt ad vissza, amit a felhasználó meg ad és legfeljebb 20, legalább 2 elemből fog állni.
 
 ## data
 A `data` különböző adatrétegek elérésére kínál számunkra lehetőséget. Lássuk sorban mire is.
@@ -159,16 +159,14 @@ if(!name) {
 ### data.sessionStorage
 Egy adot beszélgetéshez tartozó adatstruktúrát tárolhatunk a `data.sessionStorage`-ban. Két metódusa van. A `set` és a `get`. Lássuk a használati példákat:
 #### data.sessionStorage.get ( [string] `name` )
-Ezzel a `data.sessionStorage`-ból olvashatunk. Egy `Promise`-t fog vissza adni, ami a `name`-hez tartozó értéket adja vissza. Amennyiben nem tartozik hozzá érték `undefined` választ kapunk. Lássunk egy gyakorlati példát, ahol megvizsgáljuk hogy a `data.sessionStorage` tartalmaz e **name** néven értéket, és ha igen köszöntsük a felahasználót a már korábban tárolt nevén:
+Ezzel a `data.sessionStorage`-ból olvashatunk. A `name`-hez tartozó értéket adja vissza. Amennyiben nem tartozik hozzá érték `undefined` értéket kapunk. Lássunk egy gyakorlati példát, ahol megvizsgáljuk hogy a `data.sessionStorage` tartalmaz e **name** néven értéket, és ha igen köszöntsük a felahasználót a már korábban tárolt nevén:
 
 ```js
-data.sessionStorage.get('name').then(function(name){
-    if(name) {
-        echo 'Hello ' + name + '!';
-    } else {
-        echo 'Hello My Friend!';
-    }
-});
+if(data.sessionStorage.get('name')) {
+    speak('Hello ' + name + '!');
+} else {
+    speak('Hello My Friend!');
+}
 ```
 
 #### data.sessionStorage.set ( [string] `name`, [mixed] `value` )
@@ -177,12 +175,12 @@ Ezzel a `data.sessionStorage`-ba írhatunk. A `name` határozza meg hogy milyen 
 ```js
 data.sessionStorage.get('name').then(function(name){
     if(name) {
-        echo 'Hello ' + name + '!';
+        speak 'Hello ' + name + '!';
     } else {
-        echo 'What is your name?';
-        input('text').then(function(name){
+        speak 'What is your name?';
+        ask('text').then(function(name){
             data.sessionStorage.set('name', name);
-            echo 'Hello ' + name + '!';
+            speak 'Hello ' + name + '!';
         });
     }
 });
@@ -198,7 +196,20 @@ data.sessionStorage.get('name').then(function(name){
 ### data.dictionary
 
 ## hasAccess ( [string] `method` )
+Lehetőség van jogosultságok vizsgálatára. A `method` paraméter egy adott művelet nevét várja. Meg kérdezhetjük hogy van e jogosultságunk erre műveletre a felhasználóval kapcsolatban. Így egy `Promise`-t kapunk, aminek egy paramétere van, ami tartalmazza, hogy van e vagy nincs jogosultságunk. Például megtudhatjuk e a nevét ha akarjuk:
+
+```js
+hasAccess('user.name').then(function(hasAccess){
+    if(hasAccess) {
+        tell('I have acces to read your name! :)');
+    } else {
+        tell('I have no acces to read your name! :(');
+    }
+});
+```
+
 ## getAccess ( [array] `methods` )
+Lehetőség van megkérni a felhasználót hogy adjon jogosultságot valamihez ha nem lenne.
 
 ## api
 ### api.mailToUser ( [string] `userId`, [string] `text`, [date, optional] `date`, [string, optional] `from` )
