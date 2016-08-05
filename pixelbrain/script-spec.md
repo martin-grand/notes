@@ -89,13 +89,13 @@ Az alábbi típusok elérhetőek:
 - **number** (egy számot kérhetünk be. Az `options` paraméterben 2 paraméter adható meg: `minimum`, `maximum`) Az alábbi példák mutatják ennek a felhasználását:
     - `input('number')` egy tetszőleges számot kérünk be.
     - `input('number', { minimum : -100, maximum : 100 })` egy számot kérünk be **-100** és **100** között.
-- **time** (egy időpontot kérhetünk be a felhasználótól. Az `options` paraméterben 2 paraméter adható meg: `minimum`, `maximum`. Itt meghatározhatjuk hogy mi legyen a legkorább és legkésőbbi időpont ami megadható) Az alábbi példák, különböző eshetőségeteket mutatnak be:
+- **time** *not imlemented* (egy időpontot kérhetünk be a felhasználótól. Az `options` paraméterben 2 paraméter adható meg: `minimum`, `maximum`. Itt meghatározhatjuk hogy mi legyen a legkorább és legkésőbbi időpont ami megadható) Az alábbi példák, különböző eshetőségeteket mutatnak be:
     - `input('time')` így egy pontos időpontot kérhetünk be, mondjuk egy emlékeztető időpontját.
     - `input('time', { minimum : '9:00', maximum : '17:30' })` így egy időpontot kérhetünk be 9:00 és 17:00 között, például mikorra kér időpontot. A visszatérő érték egy szöveg lesz, pl.: '14:45'
-- **date** (egy dátumot kérhetünk be a felhasználótól. Az `options` paraméterben 2 paraméter adható meg: `minimum`, `maximum`. Itt meghatározhatjuk hogy mi legyen a legkorább és legkésőbbi dátum ami megadható) Az alábbi példák, különböző eshetőségeteket mutatnak be:
+- **date** *not imlemented* (egy dátumot kérhetünk be a felhasználótól. Az `options` paraméterben 2 paraméter adható meg: `minimum`, `maximum`. Itt meghatározhatjuk hogy mi legyen a legkorább és legkésőbbi dátum ami megadható) Az alábbi példák, különböző eshetőségeteket mutatnak be:
     - `input('date')` így egy tetszőleges dátumot kérhetünk be.
     - `input('date', { minimum : new Date(1900,0,14), maximum : new Date() })` így egy időpontot kérhetünk be 1900 Január 14. és a mai dátum között.  A visszatérő érték egy dátum objektum lesz.
-- **dateTime** (egy dátumidőt kérhetünk be a felhasználótól. Az `options` paraméterben 4 paraméter adható meg: `minimumDate`, `maximumDate`, `minimumTime`, `maximumTime`,. Itt meghatározhatjuk hogy mi legyen a legkorább és legkésőbbi dátum ami megadható, illetve a legkorábbi és legkésőbbi időpont) Az alábbi példák, különböző eshetőségeteket mutatnak be:
+- **dateTime** *not imlemented* (egy dátumidőt kérhetünk be a felhasználótól. Az `options` paraméterben 4 paraméter adható meg: `minimumDate`, `maximumDate`, `minimumTime`, `maximumTime`,. Itt meghatározhatjuk hogy mi legyen a legkorább és legkésőbbi dátum ami megadható, illetve a legkorábbi és legkésőbbi időpont) Az alábbi példák, különböző eshetőségeteket mutatnak be:
     - `input('dateTime')` így egy tetszőleges dátumidőt kérhetünk be.
     - `input('dateTime', { minimumDate : new Date(1900,0,14), maximumDate : new Date(), minimumTime : '9:00', maximumTime : '17:30' })` így egy időpontot kérhetünk be 1900 Január 14. és a mai dátum között 9:00 és 17:00 közti időpontban.  A visszatérő érték egy dátum objektum lesz.
 - **select** (álltalunk meghatározott értékek közül kínálhatunk fel választási lehetőséget a felhasználónak) Az `options` paraméterben egy values tömböt vár az input, ahol megadhatjuk hogy mi kerüljün kiírásra és milyen értéken, az alábbi módon:
@@ -204,14 +204,14 @@ data.sessionStorage.get('name').then(function(name){
 ### api.mailToUser ( [string] `userId`, [string] `text`, [date, optional] `date`, [string, optional] `from` )
 ### api.http ( [string] `method`, [string] `url`, [object, optional] `data`, [object, optional] `header` )
 ### api.log ( [string] `text`, [string, optional] `label` )
-### api.loadComponent ( [string] `componentId`, [string, optional] `scope`, [object, optional] `parameters` )
+### api.loadComponent *not imlemented* ( [string] `componentId`, [string, optional] `scope`, [object, optional] `parameters` )
 
-### api.createPayment ( [string] `from`, [string] `to`, [number] `credit` ) // available later!
-### api.applyPayment ( [string] `id` ) // available later!
-### api.cancelPayment ( [string] `id` ) // available later!
+### api.createPayment *not imlemented* ( [string] `from`, [string] `to`, [number] `credit` )
+### api.applyPayment *not imlemented* ( [string] `id` )
+### api.cancelPayment *not imlemented* ( [string] `id` ) 
 
-### api.createBot ( [object] `source` )
-### api.createArticle ( [object] `source` ) // available later!
+### api.createBot *not imlemented* ( [object] `source` )
+### api.createArticle *not imlemented* ( [object] `source` )
 
 ### api.createEvent ( [string] `name`, [mixed, optional] `value` )
 Lehetőség van saját eventek küldésére oda ahol az adott robot beágyazásra kerül, így a beágyazó oldal tud reagálni különböző eseményekre.
@@ -219,7 +219,7 @@ Lehetőség van saját eventek küldésére oda ahol az adott robot beágyazásr
 ### api.open ( [string] `url`, [string, optional] `method`, [object, optional] `data` )
 Ennek a metódusnak a meghívásával elnavigálhatjuk a felhasználót egy webcímre.
 
-## importUtility ( [string] `name`, [string, optional] `alias` )
+## importUtility *not imlemented* ( [string] `name`, [string, optional] `alias` )
 ## utility
 
 ## delay 
