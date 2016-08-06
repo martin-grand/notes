@@ -209,7 +209,20 @@ hasAccess('user.name').then(function(hasAccess){
 ```
 
 ## getAccess ( [array] `methods` )
-Lehetőség van megkérni a felhasználót hogy adjon jogosultságot valamihez ha nem lenne.
+Lehetőség van megkérni a felhasználót hogy adjon jogosultságot műveletekhez ha nem lenne. A `method` paraméter egy tömböt vár, ami tartalmazza a jogosultság kulcsokat. Visszatérési értékként egy `Promise`-t kapunk, aminek egy paramétere van, ami tartalmazza, hogy a felhasználó engedélyezte vagy sem a jogosultságokat.
+
+```js
+getAccess(['user.name', 'user.email']).then(function(hasAccess){
+    if(hasAccess) {
+        say('Thank you for add acces to read this things!');
+    } else {
+        say('I\'m sorry to reject my request..:(');
+    }
+});
+```
+A következő accessek vannak:
+- `user.name` a felhasználó nevének olvasása
+- `user.email` a felhasználó emailcímének olvasása
 
 ## api
 ### api.mailToUser ( [string] `userId`, [string] `text`, [date, optional] `date`, [string, optional] `from` )
