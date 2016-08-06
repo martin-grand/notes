@@ -186,11 +186,12 @@ data.sessionStorage.get('name').then(function(name){
 });
 ```
 
-
 ### data.botStorage
 ### data.user
 #### data.user.get ( [string] `name` )
-#### data.user.set ( [string] `name`, [mixed] `value` )
+ahol a `name` lehet 'name', 'email', 'settings', 'attributes'
+#### data.user.set ( [string] `name`, [string] `value`, [boolean] `public` )
+#### data.user.setting ( [string] `name`, [string] `value` )
 ### data.component
 ### data.history
 ### data.dictionary
@@ -221,8 +222,13 @@ getAccess(['user.name', 'user.email']).then(function(hasAccess){
 });
 ```
 A következő accessek vannak:
-- `user.name` a felhasználó nevének olvasása
-- `user.email` a felhasználó emailcímének olvasása
+- `user.name` a felhasználó nevének olvasása.
+- `user.email` a felhasználó emailcímének olvasása.
+- `user.settings` a felhasználó beállításainak olvasása.
+- `user.attributes` a felhasználóhoz társított információk olvasása, amit más robotok vagy mi írtunk bele.
+- `user.writePublic` a felhasználóhoz társíthatunk információkat, amiket más robotok is láthatnak ha kapnak `user.attributes` jogosultságot.
+- `user.writePrivate` a felhasználóhoz társíthatunk információkat, amiket csak mi láthatunk, ha kapunk `user.attributes` jogosultságot.
+- `user.writeSettings` a felhasználó beállításainak írás joga.
 
 ## api
 ### api.mailToUser ( [string] `userId`, [string] `text`, [date, optional] `date`, [string, optional] `from` )
