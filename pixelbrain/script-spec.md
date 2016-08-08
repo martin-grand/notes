@@ -102,7 +102,7 @@ Az alábbi típusok elérhetőek:
 ```js
 say('Which are not fruit?');
 
-ask('select', { values : [
+ask('select', { value : [
     { label : 'apple', value : 0 },
     { label : 'pear', value : 0 },
     { label : 'carrot', value : 1 }
@@ -118,7 +118,7 @@ ask('select', { values : [
 ```js
 say('Which are fruit(s)?');
 
-ask('multiple-select', { minimum : 1, maximum : 2, values : [
+ask('multiple-select', { minimum : 1, maximum : 2, value : [
     { label : 'apple', value : 0 },
     { label : 'pear', value : 0 },
     { label : 'carrot', value : 1 }
